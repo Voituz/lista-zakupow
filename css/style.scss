@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+// <i class="fas fa-times-circle"></i>
+// <i class="fas fa-plus-circle"></i>
+$green: rgb(34, 209, 28);
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5vh;
+  background-color: rgba(228, 228, 20, 0.719);
+  min-height: 100vh;
+  font-family: roboto, arial, sans-serif;
+  color: rgba(0, 0, 0, 0.822);
+
+  h1 {
+    flex-basis: 10vh;
+    text-transform: uppercase;
+    font-size: 7vh;
+  }
+
+  form {
+    flex-basis: 9vh;
+
+    input {
+      font-size: 3vh;
+      padding: 10px 15px;
+      border-radius: 20px;
+      transition: .3s;
+
+      &:focus {
+        border-radius: 20px;
+        border: 2px solid transparent;
+        box-shadow: 0 0 0 3px $green;
+        outline-width: 0;
+      }
+    }
+
+    button {
+      margin-left: 2vw;
+      border-radius: 50%;
+      width: 8vh;
+      height: 8vh;
+      outline-width: 0;
+      text-transform: uppercase;
+      font-weight: bold;
+      background-color: $green;
+      color: white;
+      font-size: 4vh;
+      border: none;
+      transition: .3s;
+
+      &:hover {
+        box-shadow: 0 0 0 3px rgba(228, 228, 20, 0.719), 0 0 0 6px $green;
+        cursor: pointer;
+      }
+    }
+  }
+
+  h2 {
+    font-weight: normal;
+    flex-basis: 8vh;
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+  p.search {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 3vh;
+  }
+
+  input.search {
+    border-radius: 20px;
+    padding: 5px;
+    transition: .3s;
+
+    &:focus {
+      border: 2px solid $green;
+      outline-width: 0;
+    }
+  }
+
+  p.list {
+    margin-top: 2vh;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 1vh;
+  }
+
+  ul.list {
+    position: relative;
+    list-style: none;
+    text-align: left;
+    // align-self: ;
+
+    li {
+      position: relative;
+      background-color: rgba(87, 255, 21, 0.363);
+      // background-color: rgba(66, 88, 57, 0.363);
+      margin: 1vh;
+      padding: 1vh 0 1vh 4vh;
+      font-size: 3vh;
+      width: 50vw;
+      word-wrap: break-word;
+
+      button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 5vh;
+        width: 20%;
+        background-color: rgba(252, 4, 4, 0.685);
+        color: white;
+        font-weight: bold;
+        border: none;
+        transform: translate(100%);
+        transition: .3s;
+        &:hover {
+          transform: translate(100%) scale(1.1);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+@import '_media.scss';
