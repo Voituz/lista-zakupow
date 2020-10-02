@@ -69,7 +69,7 @@
   cursor: text;
 }
 
-.wrapper form input:hover .wrapper form input:focus {
+.wrapper form input:focus {
   border-radius: 20px;
   border: 2px solid transparent;
   -webkit-box-shadow: 0 0 0 3px #22d11c;
