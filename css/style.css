@@ -4,6 +4,11 @@
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  cursor: default;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .wrapper {
@@ -25,26 +30,46 @@
 }
 
 .wrapper h1 {
-  -ms-flex-preferred-size: 10vh;
-      flex-basis: 10vh;
+  -ms-flex-preferred-size: 7vh;
+      flex-basis: 7vh;
   text-transform: uppercase;
-  font-size: 7vh;
+  font-size: 5vh;
 }
 
 .wrapper form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -ms-flex-preferred-size: 9vh;
       flex-basis: 9vh;
+  width: 70%;
+  max-width: 500px;
 }
 
 .wrapper form input {
+  margin-bottom: 1vh;
   font-size: 3vh;
-  padding: 10px 15px;
+  padding: 1vh;
   border-radius: 20px;
   -webkit-transition: .3s;
   transition: .3s;
+  width: 100%;
 }
 
-.wrapper form input:focus {
+.wrapper form input:hover {
+  cursor: text;
+}
+
+.wrapper form input:hover .wrapper form input:focus {
   border-radius: 20px;
   border: 2px solid transparent;
   -webkit-box-shadow: 0 0 0 3px #22d11c;
@@ -53,29 +78,29 @@
 }
 
 .wrapper form button {
-  margin-left: 2vw;
-  border-radius: 50%;
-  width: 8vh;
-  height: 8vh;
+  border-radius: 20px;
+  width: 20vh;
+  font-size: 3vh;
+  padding: 2vh;
   outline-width: 0;
   text-transform: uppercase;
   font-weight: bold;
   background-color: #22d11c;
   color: white;
-  font-size: 4vh;
   border: none;
   -webkit-transition: .3s;
   transition: .3s;
 }
 
 .wrapper form button:hover {
-  -webkit-box-shadow: 0 0 0 3px rgba(228, 228, 20, 0.719), 0 0 0 6px #22d11c;
-          box-shadow: 0 0 0 3px rgba(228, 228, 20, 0.719), 0 0 0 6px #22d11c;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
   cursor: pointer;
 }
 
 .wrapper h2 {
   font-weight: normal;
+  font-size: 4vh;
   -ms-flex-preferred-size: 8vh;
       flex-basis: 8vh;
 }
@@ -92,13 +117,21 @@
 
 .wrapper input.search {
   border-radius: 20px;
-  padding: 5px;
+  font-size: 2vh;
+  padding: 1vh;
   -webkit-transition: .3s;
   transition: .3s;
 }
 
+.wrapper input.search:hover {
+  cursor: text;
+}
+
 .wrapper input.search:focus {
-  border: 2px solid #22d11c;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  -webkit-box-shadow: 0 0 0 3px #22d11c;
+          box-shadow: 0 0 0 3px #22d11c;
   outline-width: 0;
 }
 
@@ -107,6 +140,27 @@
   text-transform: uppercase;
   font-weight: bold;
   margin-bottom: 1vh;
+  font-size: 3vh;
+}
+
+.wrapper button.reset {
+  margin: 1vh;
+  padding: 1vh;
+  text-transform: uppercase;
+  font-size: 3vh;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(252, 4, 4, 0.842);
+  border-radius: 5px;
+  border: none;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.wrapper button.reset:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  cursor: pointer;
 }
 
 .wrapper ul.list {
@@ -122,6 +176,7 @@
   padding: 1vh 0 1vh 4vh;
   font-size: 3vh;
   width: 50vw;
+  max-width: 400px;
   word-wrap: break-word;
 }
 
@@ -147,20 +202,52 @@
   cursor: pointer;
 }
 
+.wrapper ul.list li.checked {
+  text-decoration: line-through;
+  color: #5c5a5a;
+  background-color: rgba(66, 88, 57, 0.363);
+}
+
+.wrapper ul.list li.unchecked {
+  text-decoration: none;
+  background-color: rgba(87, 255, 21, 0.363);
+}
+
 @media (orientation: landscape) and (max-width: 1024px) {
   .wrapper h1 {
-    font-size: 7vw;
+    font-size: 5vw;
   }
   .wrapper form input {
-    font-size: 3vw;
+    font-size: 5vw;
+    width: 100%;
   }
   .wrapper form button {
-    width: 8vw;
-    height: 8vw;
+    font-size: 3vw;
+    padding: 2vw;
+    width: 20vw;
+    -ms-flex-item-align: end;
+        align-self: flex-end;
+  }
+  .wrapper h2 {
+    -ms-flex-preferred-size: 8vw;
+        flex-basis: 8vw;
     font-size: 4vw;
   }
   .wrapper p.search {
     font-size: 3vw;
+  }
+  .wrapper input.search {
+    font-size: 2vw;
+    padding: 1vw;
+  }
+  .wrapper p.list {
+    font-size: 3vw;
+  }
+  .wrapper button.reset {
+    margin: 1vw;
+    padding: 1vw;
+    font-size: 3vw;
+    font-weight: bold;
   }
   .wrapper ul.list li {
     margin: 1vw;

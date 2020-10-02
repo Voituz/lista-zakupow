@@ -1,26 +1,54 @@
-@media (orientation: landscape) and (max-width: 1024px) {
+@media (orientation: landscape) and (max-width:1024px) {
   .wrapper {
     h1 {
-      font-size: 7vw;
+      font-size: 5vw;
     }
+
     form {
       input {
-        font-size: 3vw;
+        font-size: 5vw;
+        width: 100%;
       }
+
       button {
-        width: 8vw;
-        height: 8vw;
-        font-size: 4vw;
+        font-size: 3vw;
+        padding: 2vw;
+        width: 20vw;
+        align-self: flex-end;
       }
     }
+
+    h2 {
+      flex-basis: 8vw;
+      font-size: 4vw;
+    }
+
     p.search {
       font-size: 3vw;
     }
+
+    input.search {
+      font-size: 2vw;
+      padding: 1vw;
+    }
+
+    p.list {
+      font-size: 3vw;
+    }
+
+    button.reset {
+      margin: 1vw;
+      padding: 1vw;
+      font-size: 3vw;
+      font-weight: bold;
+    }
+
     ul.list {
       li {
         margin: 1vw;
         padding: 1vw 0 1vw 4vw;
         font-size: 3vw;
+
         button {
           font-size: 5vw;
         }

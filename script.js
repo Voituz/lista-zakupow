@@ -1,60 +1,129 @@
+// HTML elements
 const form = document.querySelector('.add');
+const formInput = document.querySelector('form input');
 const positions = document.querySelector('h2 span');
 const searchArea = document.querySelector('input.search');
+const resetBtn = document.querySelector('.reset');
 const ul = document.querySelector('ul.list');
+
+// classes
+const checked = 'checked';
+const unchecked = 'unchecked';
+
+// variables
 let number = 0;
+let id;
+let listLi;
 
-// add positions + remove + check
-const addPosition = function (e) {
-    e.preventDefault();
-    const formInput = document.querySelector('form input');
-    if (formInput.value === '') return;
-    const li = document.createElement('li');
-    li.textContent = formInput.value + ' ';
-    ul.appendChild(li);
-    li.style.textDecoration = 'none'
-    formInput.value = '';
-    positions.textContent = ++number;
-
-    // create removeBtn
-    const removeBtn = document.createElement('button');
-    removeBtn.textContent = ' X ';
-    li.appendChild(removeBtn);
-
-    //remove positions
-    const remove = function (e) {
-        e.target.parentNode.remove();
-        positions.textContent = --number;
-    }
-    removeBtn.addEventListener('click', remove);
-
-    // check positions
-    const checkPosition = function () {
-        if (li.style.textDecoration == 'none') {
-            li.style.textDecoration = 'line-through';
-            li.style.backgroundColor = 'rgba(66, 88, 57, 0.363)'
-        } else {
-            li.style.textDecoration = 'none';
-            li.style.backgroundColor = 'rgba(87, 255, 21, 0.363)'
-        }
-        console.log(li.style.textDecoration);
-    }
-    li.addEventListener('click', checkPosition);
+// retrieve from localStorage and render
+function loadList(arr) {
+  arr.forEach(function (item) {
+    addItem(item.name, item.id, item.done, item.trash);
+  });
 }
+
+let count = localStorage.getItem('count');
+let data = localStorage.getItem('liItem');
+if (data) {
+  listLi = JSON.parse(data);
+  id = listLi.length;
+  loadList(listLi);
+  number = count;
+  positions.textContent = count;
+} else {
+  listLi = [];
+  id = 0;
+}
+
+// function to create li
+function addItem(itemValue, id, done, trash) {
+  if (trash) {
+    return;
+  }
+
+  const doneItem = done ? checked : unchecked;
+
+  const item = `<li class="item ${doneItem}" job="complete" id="${id}">${itemValue}<button job="delete" id="${id}"> X </button></li>`;
+
+  const position = 'beforeend';
+
+  ul.insertAdjacentHTML(position, item);
+}
+
+// add li 
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const itemValue = formInput.value;
+
+  if (itemValue) {
+    addItem(itemValue, id, false, false);
+
+    listLi.push({
+      name: itemValue,
+      id: id,
+      done: false,
+      trash: false
+    });
+
+    positions.textContent = ++number;
+    localStorage.setItem('liItem', JSON.stringify(listLi));
+    localStorage.setItem('count', number);
+    id++;
+    
+  }
+  formInput.value = '';
+});
+
+// function check 
+function checkItem(element) {
+  element.classList.toggle(checked);
+  element.classList.toggle(unchecked);
+
+  listLi[element.id].done = listLi[element.id].done ? false : true;
+};
+
+// function remove
+function removeItem(element) {
+  element.parentNode.parentNode.removeChild(element.parentNode);
+  listLi[element.id].trash = true;
+  positions.textContent = --number;
+  localStorage.setItem('count', number);
+};
+
+// check and remove li items
+ul.addEventListener('click', function (event) {
+  const element = event.target;
+  const elementJob = element.attributes.job.value;
+
+  if (elementJob == 'complete') {
+    checkItem(element);
+  } else if (elementJob == 'delete') {
+    removeItem(element);
+  };
+
+  
+  localStorage.setItem('count', number);
+  localStorage.setItem('liItem', JSON.stringify(listLi));
+  console.log(elementJob);
+});
+
+// clear everything
+resetBtn.addEventListener('click', function() {
+  localStorage.clear();
+  location.reload();
+})
 
 // search items
 const searchItems = function (e) {
-    const find = e.target.value.toLowerCase();
-    const liItems = ul.getElementsByTagName('li');
-    Array.from(liItems).forEach(function (li) {
-        const txt = li.textContent;
-        if (txt.toLowerCase().indexOf(find) != -1) {
-            li.style.display = 'block';
-        } else {
-            li.style.display = 'none';
-        }
-    })
+  const find = e.target.value.toLowerCase();
+  const liItems = ul.getElementsByTagName('li');
+  Array.from(liItems).forEach(function (li) {
+      const txt = li.textContent;
+      if (txt.toLowerCase().indexOf(find) != -1) {
+          li.style.display = 'block';
+      } else {
+          li.style.display = 'none';
+      }
+  })
 }
-
-form.addEventListener('submit', addPosition);
 searchArea.addEventListener('keyup', searchItems);
